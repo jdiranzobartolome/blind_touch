@@ -1,0 +1,7 @@
+NOTE: Things here are things that need to be done. But there might be more things needed which are not written here yet. 
+
+- if the user changes the path of the main folder, the systemctl service cannot find the python script main. Solve that. 
+     Method: basically you need to find out if there is a way to use variables in systemd unit files
+             or a way of doing a simlink to the file or something like that. 
+
+

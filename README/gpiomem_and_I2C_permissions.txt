@@ -1,0 +1,56 @@
+-- Remember to change the ownership of the /dev/i2c-1 and the /dev/gpiomem files and creating the group gpio and making the file 
+   gpiomem and i2c-1 owned by root and the group gpio and i2c (respectively) and adding odroid user to both grpups
+   and then doing the chmod 666 /dev/i2c-1 (y con gpiomem). 
+NOTE:DEVS ARE CREATED AT BOOT TIME, SO THE ONES THAT HAVE A GROUP BY DEFAULT WILL ALWAYS WORK, THE ONES THAT NOT WILL BE AGAIN
+     ROOT:ROOT IN THEIR PERMISSIONS SO YOU NEED TO CREATE A UDEV RULE SO THEY CHANGE THEIR PERMISSIONS WHEN BOOTING. 
+
+
+For being able to run the programm as a non sudo user the ownership of the /dev/i2c-1 (it could be another one
+depending on the distro) and the /dev/gpiomem files. There is a really important thing to remember:
+
+- Devs files are created at boot time so after restarting their ownership goes back to the original one. From this dev files
+  we can consider two possibilities:
+
+      1) the dev file has, by default, a group associated to it (ex: i2c).
+      2) the dev file does not have, by default, a group associated to it. 
+
+Both cases are similar but, in the second case, it is necessary to also create a group (ex: gpiomem group) and add the user
+to it. In the first case it is enough with just adding the user. 
+
+For changing the ownerships of the dev files a "udev rule" is needed. udev rules are a set of configurable rules which affect the 
+creation of the /dev/ nodes when starting the system (/dev/ creation are controlled by udev).
+
+
+
+You can change the permissions on a device node using chmod, eg:
+
+chmod g+rw /dev/whatever
+
+This adds read/write permissions for the group owning 'whatever'. A lot of stuff in /dev is uid and gid 0 (owner root, group root) but some things have a separate group such as 'video' or 'disk', and when this is the case, the group will already have read write permissions on the node. So, first check if the node you are interested in is like that:
+
+stat -c "%A %G" /dev/whatever
+
+If so, just add the pi user to that group. If the group is called "mydevice":
+
+usermod -a -G mydevice pi
+
+Done. If the node does not belong to a special group, you can create one:
+
+addgroup mydevice
+
+Note on some distros this command is groupadd. Now chown the device to that group and tweak the permissions:
+
+chown root.mydevice /dev/whatever
+chmod g+rw /dev/whatever
+
+Then add the pi user to the group. The new group, and the pi user's membership in it, are permanent (until you change them again). However, the dev nodes are actually created at boot, so any changes you make to them will not persist. You can make that permanent by adding a udev rule. Create a text file in /etc/udev/rules.d called mydevice.rules (or anything with the suffix .rules) and add a rule:
+
+KERNEL=="whatever", NAME="%k", GROUP="mydevice", MODE="0660"
+
+Beware the difference between == and = there.  
+
+
+
+Udev rules are defined into files with the .rules extension. There are two main locations in which those files can be placed: /usr/lib/udev/rules.d it's the directory used for system-installed rules, /etc/udev/rules.d/ is reserved for custom made rules.
+
+The files in which the rules are defined are conventionally named with a number as prefix (e.g 50-udev-default.rules) and are processed in lexical order independently of the directory they are in. Files installed in /etc/udev/rules.d, however, override those with the same name installed in the system default path. 

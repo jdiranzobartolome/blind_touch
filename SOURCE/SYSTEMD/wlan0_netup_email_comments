@@ -1,0 +1,42 @@
+[Unit]
+Description=Service on interface wlan0
+##BindsTo works well. It makes the service stop if the other stops
+BindsTo=sys-subsystem-net-devices-wlan0.device
+##See below in the INSTALL section for more info. I do this so the script
+## does not start when there is no IP.Of course, if there is IP in other interface
+## it will still crash. However, there are other solutions, see at the bottom.
+##UPDATE: network-online.target does not stop when there is no internet. Not sure way. This does not work.
+#After=getty@tty1.service
+After=sys-subsystem-net-devices-wlan0.device
+#Requisite=sys-subsystem-net-devices-wlan0.device
+##This ones literally seem to not do anything. Particularly PartOf does nothing of 
+##what is stated in the documentation
+#PartOf=sys-subsystem-net-devices-wlan0.device
+#ReloadPropagatedFrom=sys-subsystem-net-devices-wlan0.device
+
+[Service]
+#The service should be type oneshot, which assures it executes ones and, after that, all the dependencies start following. However, for some nonsense
+# restart is not allowed with oneshot. So, while there are work arounds in bash, for services without dependencies, like this one, 
+# a symple type (their dependencies start running even if it didnt finish yet) with restart on failure and RemainAfterExit will work similarly.
+Type=simple
+## First of the solutions for a lack of IP. Without IP it exited with an error so you can put a 
+## restart of several seconds so it keeps trying (there is a counter of 5 tries)
+Restart=on-failure
+RestartSec=5
+#this shows the service as succesfully active if the oneshot execution finish without errors
+RemainAfterExit=yes
+#script to execute when the service starts
+ExecStart=/bin/bash /home/odroid/wlan0_netup_email_service.sh wlan0
+
+[Install]
+##Careful!! Supossely there should be no need of this (according to man page of systemd) since this are units that need to, literally, start at the same time (there is a symlink for that)
+##I need them to start ater wlan0 network so, according to documentation, ti should be enough to state PartOf in the Unit section with the After.
+## However in rpactice that does not work like that. So I will set a symlink and, inside the bash script, I will code it in a way that the email
+## with the IP is not sent until an IP is set.
+WantedBy=sys-subsystem-net-devices-wlan0.device
+#Apparently this one is also needed. This one, when in user files, means that the service initiates when logging in. I believe what happens is that the 
+#wlan service inititates before the autologgin service finishes. There are two options: I use this default.target and add Require=wlan-service so that this
+#service does not start when logging if there is no IP. Or (better) I change the network service so it happens after the logging or the logging so it happens after the network. Modifying the network service seems... bold,
+#it might affect many things. Autologging service is a simple custom service so I will try to make that one happen Before=wlan.service. Let's see...
+#It didnt work. I will keep with this plan.. mh.... thing it better, I said a stupid thing. Why would wlan.service be important if we can do without it (if we do not use a usb wifi doggle). I will try an delay it!! Did not work, keep going with the plan... xD 
+#WantedBy=default.target

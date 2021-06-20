@@ -1,0 +1,19 @@
+In order to be able to use pulseaudio without activating its systemwide mode (which can come up with some security issues) the script 
+needs to be executed by a logged in user. For the system to be executed headless when booting the system, automatic log-in on boot of the user 
+needs to be allowed. 
+
+For that, the systemd unit file related to the service of one of the terminals need to be overriden. By running:
+$ sudo systemctl edit getty@tty1.service
+the editor will popup and the next code needs to be written (if systemctl edit command does not work, the directory and file can be normally created.
+
+
+###/etc/systemd/system/getty@tty1.service.d/override.conf###########
+-----------------------------------------------------------------------------------------------------------------------------------------
+[Service]
+ExecStart=
+ExecStart=-/sbin/agetty --noissue --autologin odroid %I $TERM
+Type=idle
+
+####################################################################
+
+From then on, the user 'odroid' will log-in automatically through tty1 (any other terminal can be used by changing their service unit in the same way)

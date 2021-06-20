@@ -1,0 +1,4 @@
+#!usr/bin/sh
+
+arecord -l | grep -e "USB Audio Device" |  grep -oP "device\s+\K\w+"
+arecord -l | grep -e "USB Audio Device" | grep -oP "device\s+\K\w+"

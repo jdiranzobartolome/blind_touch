@@ -1,0 +1,23 @@
+#this file defines a service which will execute wlan0_setup_email_service.sh each time the wlan0.device
+#restarts. Unfortunately, wlan.device only restarts when a external network card is connected, no when the connection
+# is changed. So this will send an email each time the external wifi doggle of the odroid connects to the port.
+
+#This file is a user-file (even though probably it could be set as a system unit file and it would facilitate
+# things regarding the order of service activations). Therefore it has to be placed in: /home/odroid/.config/systemd/user/
+
+
+[Unit]
+Description=Service on interface wlan0
+BindsTo=sys-subsystem-net-devices-wlan0.device
+After=sys-subsystem-net-devices-wlan0.device
+
+[Service]
+
+Type=simple
+Restart=on-failure
+RestartSec=5
+RemainAfterExit=yes
+ExecStart=/bin/bash /home/odroid/wlan0_netup_email_service.sh wlan0
+
+[Install]
+WantedBy=sys-subsystem-net-devices-wlan0.device

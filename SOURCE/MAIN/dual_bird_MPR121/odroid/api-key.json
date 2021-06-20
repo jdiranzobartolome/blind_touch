@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "tribal-monolith-149901",
+  "private_key_id": "7516c332afc3181fe973125f22428191d947a7ce",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDJ1cCcfHqll3YF\nUpSf9J5zwsCF9UorKsOgWMmllkZjntLk5MTH/Lzz5lk+IB7HjNuMN24oKL4EMo03\n8tZfdS5/NQLaBcgYaZQ+tx8g1w3U9Ukg8b0j5QuAQcSzQlMFjdQ0vmCQ7r44uq3c\nad0IPhSMQTuNPQ4IMTwuWP/hFCyEmUGQ6KEgUT/rn7e/EY4llr3xYC3muhpChi9V\nx3A9+/23OYGKBQ/7EThNBpw9A0BQmcP0S4o/yNGggBj3Zav++eJFKAreW4dKXX2i\nRcSeoy3tg6/ry7kEAarcVX80ZtC77j/sYWWqekLHrmCcHJVzQ4rxGgqiCRAZflOx\neFCRG0TzAgMBAAECggEAA88gaPOidECVA3ReW1xy/G1MU9rgEPYoJf0MT9neWd/z\n9p+TT9DnF1VIEYzqonUilEAG41l4KJJ0VCjQPzycvt2BwG/ufvjIdEc2yQMLVEhi\nyRfhgW1qV6Z7b1n3liRp66rnc09w0JeZU2O+E6XpnlysIotomeKlUkdEtlCP/IVH\n+Oy08/HX5Skcz4en5hMsSpS5KVe7ePPaYNMt4ZgU5utmhEtcvpgtrb/WGcCmOqJn\nqxfhVrvDHQ+E/aV2ljcMdjlbxKahjiAuckv9pwxVPXkarN/4mNMDUTw5Tvc+RtRm\nh81mR4/4CgSoB7zfk+EPfH6J3NU3jWRaJhbFvv61aQKBgQD38ThXgyBhUCxGBRWy\nHppoN7c3mboQ9/6muCMSH+mh+f8k5vMOYBgTA9PqARDrFpOyyb7jzbbzy/it0+Es\nbTKScA+0SjARwD04YWJbCeERYTqbtd25vK8etGBwPHk0Z1j6pMQgbStrCByD7Zrv\nAJI+3aIfsF26+/oHUccnyzbMCwKBgQDQZPAqkfPgx5rqFyqVMTqytdPt54hnzu3r\nnnVFf878s1V0d+fPCssAY7A57QA9KIGSUnyN5RhrBwEuY+XeZgI658uEAk3YHMqi\ngKa1bmaithfbH3n9mJvBMfPpOW07lii9C3dx9IDF4bctbQRleRSScB8VeHdEJ6Tj\np21NzTcTuQKBgQCiiR0YMTt+z6HWXOr2Ex3BiBSxfDL/gLMM89T5wrXTmyDpPgTD\nvbbKcE3xLrW6hthX8e0TRP3UIDhrK2SHTSZD3PZOh/uvB0iatyxU5csHK6fR/4zU\nf56FEFXP/bSu57jqxixT3X0C8xROX+qbFtLIJ15qS6GGPDyRo8hci9jmNQKBgQCV\nHDRQcYCMDKbG6u6YM9JpPvs2Vh3fEUxh9E66/NlxLSxvGsCt/24DiFD3EaLDH/Ge\nbhEbQpp3MlrhA6/dsyXTWjnf6fojMW64Wc9vMGCV+i8Vpe8WypRf50s8TM/g+++I\nXOUJj8Z4UKpOAZxMsxdKNJm5Nio4hRlRn2Hxcm3/WQKBgQChShIaasH4drhVCvEe\nSiJuissXNlxLtqj9c+oZGC5EzZQaiCfH62bmyf7KlaavBIlSWQUyi1PWuj9twiGZ\nD1kQV7jXq2+S8eIlwJsraAUz2DL9dJJe4CKe2cAvG7LbyKHI9Oh8wH1GERl8E+bf\ngbktToOqOg8rDyIvgZovEd1rsA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "blind-art-voice@tribal-monolith-149901.iam.gserviceaccount.com",
+  "client_id": "115736647337269726109",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/blind-art-voice%40tribal-monolith-149901.iam.gserviceaccount.com"
+}

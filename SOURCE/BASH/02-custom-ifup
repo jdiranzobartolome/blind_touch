@@ -1,0 +1,43 @@
+#this file (great file) uses the NetworkManager-dispatcher.service. This service executes the scripts found in 
+# /etc/NetworkManager/dispatcher.d/ everytime there is a change in the connection. It uses two parameters, the first one
+# is the interface affected and the second one the action. For more information run: man NetworkManager.
+
+#The file needs to be placed in /etc/NetworkManager/dispatcher.d/ and, after that, and email with the IP everytime
+#the wlan0 interface goes up will be sent. If it is not sent, check out that NetworkManager-dispatcher.service is enable.
+ 
+if [ "${1}" = "wlan0" ] && [ "${2}" = "up" ]; then
+    
+    echo "starting IP email script"
+
+    #for making script not quit on failure. Since you added "command || true" in the command of grep, you dont need this (if grep dont find sth it will return 127)
+    #set +e 
+
+    #Since the environment variable IP_ADDRESS_N from NetworkManager seems to be empty, I use grep. 
+    #ip=$(ifconfig | grep -A 1 wlan0 | grep inet | tr -s ' ' | cut -d" ")
+    ip_line=$(ifconfig | grep -A 1 wlan0 | grep inet)
+
+    #we only send the email if the ip is not empty. Its not going to be empty because it is "up", but just in case.
+    if [ "$?" -eq 0 ]; then
+        echo "writing email with IP"
+        # writing the email to send into a file
+        file=/home/odroid/mail.txt
+        date=$(date)
+        echo "From: Your great love, Odroid <odroidart@gmail.com>" > ${file}
+        echo "To: My great love, you <jorgediranzo@gmail.com>" >> ${file}
+        echo "Subject: I give you all my IP" >> ${file}
+        echo "Date: ${date}" >> ${file}
+        echo " " >> ${file}
+        echo "${ip_line}" >> ${file}
+        echo "PD: keep coding, babe"
+
+        #sending email
+        curl --url 'smtps://smtp.gmail.com:465' --ssl-reqd \
+          --mail-from 'odroidart@gmail.com' --mail-rcpt 'jorgediranzo@gmail.com' \
+          --upload-file ${file} --user 'odroidart@gmail.com:odroidart_23'
+
+        #deleting email file
+        #rm ${file}
+    fi     
+
+echo "IP email script finished"
+fi

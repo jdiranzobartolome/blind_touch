@@ -1,0 +1,38 @@
+# exit when any command fails
+set -e
+
+if [ "$#" -ne 1 ]; then
+    echo "Illegal number of parameters. Just enter the path where you want to move the art program root folder to \n\
+          ex: mv_root_folder '/home/odroid/"
+    exit 1
+fi
+
+if [ ${1} != "/*" ]; then 
+    echo "error. do not forget to use double quotes in your path and to use an absolute path" 
+	exit 1 
+fi
+
+# for taking the double quotes out. However, in the case of .bash_profile file
+#path=$(echo -n ${1} | tail -c +1 | head -c -1)
+
+## create a temporary file in /home/odroid/ which will move all the folders
+## cannot be moved from here as this file would be in use by itself
+
+if [f ~/.profile]; then
+    file=~/.profile
+elif [f ~/.bash_login]; then
+    file=~/.bash_login
+elif [f ~/.bash_profile]; then 
+    file=~/.bash_profile
+else
+    echo "error setting environmental variable ART_SCRIPT_PATH needed by the user_art.service unit file"
+	exit 1
+fi
+ 
+echo "set -e" > ~/temp_script.sh
+echo "sed -i \ART_SCRIPT_PATH\d ${file}" >> ~/temp_script.sh
+echo "mv ../ ${1} >> ~/temp_script.sh"
+echo "echo \"export ART_SCRIPT_PATH=${1}\" >> ${file}"
+echo "rm ./temp_script.sh"
+
+exec ./temp_script.sh

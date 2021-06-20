@@ -1,0 +1,64 @@
+For the script to be executed from a user on boot two steps will be needed:
+
+    1-To activate automatic loggin on start for the user
+    2-To make a systemd user specific unit file that automatically run the script when the user logs in the system. 
+
+The systemd user unit files need to be places in the folder "home/[username]/.config/systemd/user/". The the following file needs to be placed: 
+
+##########home/odroid/systemd/user/user_art.service#########################################################################
+------------------------------------------------------------------------------------------------------------------------------------- 
+[Unit]
+Description=User service for art blind people program bird model
+After=network-online.target getty@tty1.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+#Environment=DISPLAY=:0
+## Uncomment this to lines to activate Restart function (the program will restart if it happens to close)
+#Restart=always
+#RestartSec=1
+## Two scripts will be run in order, only once each. The first one defines variables needed by systemd user environment.
+ExecStartPre=/bin/bash [absolute path]/50-systemd-user.sh
+ExecStart=/usr/bin/python3 [absolute path]/main.py
+
+[Install]
+## default.target is the target which activates when a user logs in.
+WantedBy=default.target
+-------------------------------------------------------------------------------------------------------------------------------------
+
+Where [absolute path] needs to stablish the absolute path of the correspondent file.  
+Since pulseaudio need the environment variables DISPLAY and XAUTHORITATION to work, and environment variables in systemd user environment are not
+inheritated by the global environment, an bash script for setting up the variables is needed. This is the first script 
+which is executed by the service. Place it somewhere and copy the path into [absolute path].
+
+###[absolute path]/50-systemd-user.sh###########
+**********************************************************************************************************************************
+[Service]
+#!/bin/sh
+
+## Uncomment these lines and last line for service debugging. If both lines are uncommented, a doc named "50-systemd-user.txt" will be created
+## in the same folder as this file if this script completes succesfully.
+#file="./50-systemd-user-script-check.txt"
+#if [ -f $file ] ; then
+#    rm $file
+#fi
+
+#------ main code, do not comment ----------------------------------
+systemctl --user import-environment DISPLAY XAUTHORITY
+
+if which dbus-update-activation-environment >/dev/null 2>&1; then
+        dbus-update-activation-environment DISPLAY XAUTHORITY
+fi
+#-----------------------------------------------------------------
+
+## Uncomment this line for debugging the service.
+#echo "50-systemd-user.sh script completed" > $file
+
+*********************************************************************************************************************************
+
+Once both files are created and correctly placed, running: 
+
+$ systemd --user daemon-reload; systemd --user enable user_art.service
+
+will make the service execute everytime the user odroid logs in for the first time in a session. 

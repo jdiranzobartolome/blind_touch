@@ -1,0 +1,9 @@
+for resetting the program:
+
+curl -i -X PUT -H "Content-Type:application/json" -d "{\"mic\": \"on\",  \"volume\" : \"default\", \"restart\" : \"yes\" }" http://192.168.0.29:5000/configuration
+
+
+for turning off the microphone
+
+curl -i -X PUT -H "Content-Type:application/json" -d "{\"mic\": \"off\",  \"volume\" : \"default\", \"restart\" : \"no\" }" http://192.168.0.29:5000/configuration
+
