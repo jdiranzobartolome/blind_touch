@@ -3,8 +3,6 @@
 
 #-------------------------------------------------------------------------------------
 # Main program. Needs to be executed with python3 after having changed the parameters file as desired.
-#
-# Author: Jorge David Iranzo
 #-------------------------------------------------------------------------------------
 
 import sys
@@ -62,7 +60,7 @@ def main():
     #three queues will be shared, one among voice thread and control thread, and another one between tapping thread and another one with main.
     #also two trehading.Events objects are created to pause and resume from main the voice and tapping threads.
     if (CONTROL_API == 1):
-        q_voice = queue.Queue()   # In this version I will try to send everything to main, lets see if I can....
+        q_voice = queue.Queue()   
         q_tapping = queue.Queue()
     threads = []
     threadLock = threading.Lock()

@@ -8,19 +8,11 @@
 # for recognizing double and triple tapping has being added. The configuration of the MPR121 
 # is really important and changes the latency and accuracy of the tactile response hugely. 
 # The current configuration works great for our goals but if a case in which the tactile performance 
-# is not satisfactory the following steps should be followed iteratively checking after each step
-# whether the desired resuls are reached. (TO DO) 
-#
-#    1 - Change touch and release threshold from the parameters.py file. 
-#        Never make the release threshold smaller than the touch threshold.
-#    2 - 
-#
-#
+# is not satisfactory the configuration will have to be performed manually again.
 # Similarly, if there is a problem with the tapping recognition, the variables 
 # FASTEST_TAPPING_INTERVAL (default of 0.1) and SLOWEST_TAPPING_INTERVAL (default 0.4)
 # need to be modified. 
 
-# Author: Jorge David Iranzo
 #-------------------------------------------------------------------------------------
 
 # Copyright (c) 2014 Adafruit Industries

@@ -7,15 +7,13 @@
 # for most of the system usage time. A threadLock is used in order to execute only one of the threads when needed (for
 # example, the tapping thread will not run when the user enters the VUI and the microphone thread will not run when the user 
 # is listening to an on-going audio in tapping mode).  
-
-# Author: Jorge David Iranzo
 #-------------------------------------------------------------------------------------
 
 import threading
 import time
 from Mp3player import Mp3player
 from GoogleVoice import GoogleVoice
-from parameters import *                 #in the end because of the debug variables I need to import parameters everywhere. I dont like
+from parameters import *                
 
 exitFlag = 0
 
@@ -44,9 +42,6 @@ def stop_till_on(q_voice, keyword_bool, sentence):
     #clear: clear the flag to 0.
     #wait: wait (with timeout or without) until the flag is 1.
     # With those three functions the main can make the voice system stop for as long as needed according to the parameter "mic"="on"/"off".
-    #Note: technically, its better to share queues and events directly from the API thread to both main threads leaving main alone....
-    #but like this it seems like everything is more simple. If the performance is good, leave it like this. 
-    #To-Do: In any case, later do directly from API control thread and compare speed and performance. 
     command = "on"
     while (not q_voice.empty()):
         command = q_voice.get()
@@ -125,7 +120,7 @@ def mic_thread_main(threadLock, q_voice, mp3player, google_voice, paint_mode, la
             keyword_bool = False
 
         # TO DO: make this cleaner by not hard-coding the words in the ifs, but rather using dictionaries or sth from parameters.
-        # TO DO: Get rid of the "keyword_bool" variable. By using the listen_command_while_audio function yoo already know in which stage you are of the VUI
+        # TO DO: Get rid of the "keyword_bool" variable. By using the listen_command_while_audio function you already know in which stage you are of the VUI
         # TO DO: also, therei s no need to send mp3player to the function. You can give back a response and play audio and do the rest in the main function thread 
         if ((sentence == u"그림") or (sentence == u'painting')):
             rel_path = str(language_code) + '/' + str(paint_mode) + '/general/paint'

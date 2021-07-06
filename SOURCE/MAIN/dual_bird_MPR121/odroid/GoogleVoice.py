@@ -10,8 +10,6 @@
 # "streaming_recognize" starts a generator (python iterator functions which end up in a "yield"
 # command instead of in a "return". The iterator makes the streaming process more complex so any change
 # should be made carefully. 
-
-# Author: Jorge David Iranzo
 #-------------------------------------------------------------------------------------
 
 

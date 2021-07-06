@@ -7,8 +7,6 @@
 # for most of the system usage time. A threadLock is used in order to execute only one of the threads when needed (for
 # example, the tapping thread will not run when the user enters the VUI and the microphone thread will not run when the user 
 # is listening to an on-going audio in tapping mode).  
-
-# Author: Jorge David Iranzo
 #-------------------------------------------------------------------------------------
 
 import threading

@@ -5,8 +5,6 @@
 # All parameters which the user might want to change for the system are defined here.
 # They are all defined in capital letters, which represents that they 
 # are constant parameters during execution time and help differentiate them while reading the code. 
-
-# Author: Jorge David Iranzo
 #-------------------------------------------------------------------------------------
 # [START Set_Prameters]
 
@@ -77,17 +75,9 @@ KEY_PHRASES_SP = "pintura|pìntor|ayuda"
 KEY_PHRASES = { "ko-KR": KEY_PHRASES_KR, "en-US": KEY_PHRASES_EN, "es-ES": KEY_PHRASES_SP}
 
 # Google API-KEY json path environment. Only one of next two lines have to be  uncommented
-# Uncomment next line for writing the absolute path by yourself
-# APIKEY_PATH = "/home/odroid/art_project_global/art_project_global/dual_bird_MPR121/odroid/api-key.json"
-# Uncomment next line for using relative path (read README_PROJECT_FOLDER file for info on how the folder tree needs to be arranged)
 APIKEY_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "api-key.json"))
 
-# Path of the main audio folder root. Check the read me file for knowing how to folders need to be arranged. As a reminder, an example of an 
-# audio folder might be:
-# (TO DO)
-# Uncomment next line for writing the absolute path by yourself
-# AUDIOS_PATH = "/home/odroid/art_project_global/art_project_global/"
-# Uncomment next line for using relative path (read README_PROJECT_FOLDER file for info on how the folder tree needs to be arranged)
+#line for using relative path (read README_PROJECT_FOLDER file for info on how the folder tree needs to be arranged)
 AUDIOS_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__),"../.."))
 
 # MPR121 parameters. Defines the intervals which are consider acceptable for a fast and slow tapping,

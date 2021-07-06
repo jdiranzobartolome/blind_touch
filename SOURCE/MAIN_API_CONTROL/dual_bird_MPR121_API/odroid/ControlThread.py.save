@@ -7,8 +7,6 @@
 # for most of the system usage time. A threadLock is used in order to execute only one of the threads when needed (for
 # example, the tapping thread will not run when the user enters the VUI and the microphone thread will not run when the user 
 # is listening to an on-going audio in tapping mode).  
-
-# Author: Jorge David Iranzo
 #-------------------------------------------------------------------------------------
 
 from flask import Flask
@@ -37,14 +35,10 @@ class ControlThread (threading.Thread):
 
 def control_thread_main(q_main):
     """ Ex"""
-    # I like defining this kind of things in main (even if I have to send them to the thread class afterwards
-    # but since the API is not always on and I need to use (if API=0n)... I will try to polute the original code as little as possible
     app = Flask(__name__)  #CAREFUL WITH THIS, WONDER IF IT WILL FAIL BECAUSE THIS IS NOT THE INITIAL SCRIPT, REMEMBER THIS!
     api = Api(app)
     print("configurando API")
-
-    #I create the only resource and the only instance possible. Every value receive will be automatically sent to the neighbour threads, so 
-    #no need for database nor anything like that. 
+    
     configuration = {"mic": "on", "volume": "50"}
     
     class Configuration(Resource):

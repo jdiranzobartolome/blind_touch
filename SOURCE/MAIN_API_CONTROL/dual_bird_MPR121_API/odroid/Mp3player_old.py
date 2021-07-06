@@ -5,10 +5,10 @@
 # Mp3 Class, which takes care of itializing the sound player system, playing, stopping aand calculating lengths of the different audios.
 # It has being implemented by means of the linux command line and standard program "mpg321". It could be, however, 
 # implemented by means of a python library such as PyAudio (which should be considered in case we need more complex
-# sound system in the future, such as several channels or dolby surround 5.1. 
+# sound system in the future, such as several channels or dolby surround 5.1) 
 #
-# However, more relevant that mp3 player itself is the sound server which is used. The standard linu sound server is 
-# pulse audio, hated by many. It has not being too satisfactory for this system either so we should consider changing to 
+# However, more relevant that mp3 player itself is the sound server which is used. The standard linux sound server is 
+# pulse audio. It has not being too satisfactory for this system either so we should consider changing to 
 # the more complex but technically more appealing "jack" sound server. "Jack" sound server supports dolby surround 
 # and it even has a client library for python:
 #        - https://pypi.org/project/JACK-Client/ 
@@ -24,9 +24,7 @@
 # (TO-DO: learn 5.1 dolby surround concepts, understand the jack python client (or jack native linux program)
 #         and make the 5.1 dolby surround configuration work in the Odroid. If Jack gets too complicated, check whether 
 #          the 5.1 can be done by pulseaudio and leave it as the sound server.
-#          Also, investigate about having both and both server's method of 5.1. Try everything first in a Virtual Machine
-
-# Author: Jorge David Iranzo
+#          Also, investigate about having both and both server's method of 5.1. Try everything first in a Virtual Machine.
 #-------------------------------------------------------------------------------------
 
 # [START import_libraries]

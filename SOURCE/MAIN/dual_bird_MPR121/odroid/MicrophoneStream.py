@@ -11,8 +11,6 @@
 #     the "stop" and "end" words during that time, returning none if the audio finishes for starting the main VUI prompt again
 #     which listens to a different set of words. Separating the microphone listening execution in different modular process
 #     which only listen to the needed words improves the reliability of the system as the chances of false positives decrease.   
-#
-# Author: Jorge David Iranzo
 #-------------------------------------------------------------------------------------
 
 

@@ -11,8 +11,6 @@
 #     the "stop" and "end" words during that time, returning none if the audio finishes for starting the main VUI prompt again
 #     which listens to a different set of words. Separating the microphone listening execution in different modular process
 #     which only listen to the needed words improves the reliability of the system as the chances of false positives decrease.   
-#
-# Author: Jorge David Iranzo
 #-------------------------------------------------------------------------------------
 
 
@@ -85,7 +83,7 @@ class MicrophoneStream(object):
             if ((length != 0) and ((time.time()- audio_init_t) >= length - 1)):
                 return
             
-            ## Since the maximum streaming audio is 60 seconds, I will make the google speech recognition system return empyy and wich code I will make it start again every 14 seconds. (14 seconds because I want it to be short time,
+            ## Since the maximum streaming audio is 60 seconds, I will make the google speech recognition system return empty and wich code I will make it start again every 14 seconds. (14 seconds because I want it to be short time,
             ## so the voice thread goes out of the function and is able to check often whether the mic should be on or off (since now we have control API). Google charge every audio received as if it was 15 seconds, so 14 seconds seems okay.
             if (((time.time() - audio_init_t) >= 14)):
                 return

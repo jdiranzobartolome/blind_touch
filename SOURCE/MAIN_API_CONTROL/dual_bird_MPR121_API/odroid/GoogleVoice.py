@@ -10,8 +10,6 @@
 # "streaming_recognize" starts a generator (python iterator functions which end up in a "yield"
 # command instead of in a "return". The iterator makes the streaming process more complex so any change
 # should be made carefully. 
-
-# Author: Jorge David Iranzo
 #-------------------------------------------------------------------------------------
 
 
@@ -133,7 +131,6 @@ def listen_print_loop(responses, language_code, keyword_bool, audio_length):
         if (VOICE_FEEDBACK == 1):
             ### Display interim results, but with a carriage return at the end of the
             ### line, so subsequent lines will overwrite them.
-            ###
             ### If the previous result was longer than this one, we need to print
             ### some extra spaces to overwrite the previous result
             overwrite_chars = ' ' * (num_chars_printed - len(transcript))
@@ -145,7 +142,7 @@ def listen_print_loop(responses, language_code, keyword_bool, audio_length):
                 print(transcript + overwrite_chars)
 
         ## Another way of exiting. After doing result.is_final, so the word will only be accepted if it is considered final.
-        ## Do not delete this in case it is needed
+        ## Do not delete this in case it is needed in the future
           ##Exit recognition if any of the transcribed phrases could be
           ##one of our keywords.
           ##match belongs to class re.MatchObject (https://docs.python.org/3.1/library/re.html#re.MatchObject)

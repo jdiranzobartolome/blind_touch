@@ -3,8 +3,6 @@
 
 #-------------------------------------------------------------------------------------
 # Main program. Needs to be executed with python3 after having changed the parameters file as desired.
-#
-# Author: Jorge David Iranzo
 #-------------------------------------------------------------------------------------
 
 import sys

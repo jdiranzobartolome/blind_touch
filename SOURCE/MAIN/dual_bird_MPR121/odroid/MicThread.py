@@ -7,15 +7,13 @@
 # for most of the system usage time. A threadLock is used in order to execute only one of the threads when needed (for
 # example, the tapping thread will not run when the user enters the VUI and the microphone thread will not run when the user 
 # is listening to an on-going audio in tapping mode).  
-
-# Author: Jorge David Iranzo
 #-------------------------------------------------------------------------------------
 
 import threading
 import time
 from Mp3player import Mp3player
 from GoogleVoice import GoogleVoice
-from parameters import *                 #in the end because of the debug variables I need to import parameters everywhere. I dont like
+from parameters import *                
 
 exitFlag = 0
 

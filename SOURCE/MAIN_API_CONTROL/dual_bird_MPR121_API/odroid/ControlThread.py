@@ -7,8 +7,6 @@
 # for most of the system usage time. A threadLock is used in order to execute only one of the threads when needed (for
 # example, the tapping thread will not run when the user enters the VUI and the microphone thread will not run when the user 
 # is listening to an on-going audio in tapping mode).  
-
-# Author: Jorge David Iranzo
 #-------------------------------------------------------------------------------------
 
 from flask import Flask
@@ -44,8 +42,6 @@ def control_thread_main(q_voice):
     api = Api(app)
     print("configurando API")
 
-    #I create the only resource and the only instance possible. Every value receive will be automatically sent to the neighbour threads, so 
-    #no need for database nor anything like that. 
     configuration = {"mic": "on", "volume": "50", "restart": "no"}
     
     class Configuration(Resource):
@@ -86,7 +82,6 @@ def control_thread_main(q_voice):
 
             return configuration, 200
             
-        #NOTA!! El reset se lo puedo enviar al main y que el mismo reinicie los threads o algo asi
     api.add_resource(Configuration, "/configuration")
     print(" iniciando API")
     #listen in 0.0.0.0 (all interfaces) and in a port highet than 2014 (non-high priviledged ports, so sudo is not needed to listen on those)

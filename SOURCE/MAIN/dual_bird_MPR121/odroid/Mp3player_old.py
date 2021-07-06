@@ -25,8 +25,6 @@
 #         and make the 5.1 dolby surround configuration work in the Odroid. If Jack gets too complicated, check whether 
 #          the 5.1 can be done by pulseaudio and leave it as the sound server.
 #          Also, investigate about having both and both server's method of 5.1. Try everything first in a Virtual Machine
-
-# Author: Jorge David Iranzo
 #-------------------------------------------------------------------------------------
 
 # [START import_libraries]

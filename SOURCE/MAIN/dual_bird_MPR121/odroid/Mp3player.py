@@ -25,8 +25,6 @@
 #         and make the 5.1 dolby surround configuration work in the Odroid. If Jack gets too complicated, check whether 
 #          the 5.1 can be done by pulseaudio and leave it as the sound server.
 #          Also, investigate about having both and both server's method of 5.1. Try everything first in a Virtual Machine
-
-# Author: Jorge David Iranzo
 #-------------------------------------------------------------------------------------
 
 # [START import_libraries]
@@ -47,7 +45,7 @@ class Mp3player:
         # and the second one deamonize (deattach from the terminal) pulseaudio as soon as it starts.
         os.system('pulseaudio --start')
         #os.system('pulseaudio -D')
-        # THE FOLLOWING OS COMMAND LINE SHOULD NEVER BE UNCOMMENTED AND ITS HERE ONLY FOR THE PURPOSE OF REMEMBERING
+
         # It seemed to help pulseaudio to recognize some devices but in the end in made the audio randomly start and stop.
         #os.system('pacmd unload-module module-udev-detect && pacmd load-module module-udev-detect')
         os.system('pactl -- set-sink-volume 0 ' + str(OUTPUT_VOLUME))
